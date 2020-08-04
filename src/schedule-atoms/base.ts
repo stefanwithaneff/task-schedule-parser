@@ -1,8 +1,9 @@
+import { DateTime } from "luxon";
 import { InvalidRangeError } from "./errors";
 
 export interface ScheduleAtom {
-  getNextDateAfter(date: Date): Date | null;
-  isValid(date: Date): boolean;
+  getNextDateAfter(date: DateTime): DateTime | null;
+  isValid(date: DateTime): boolean;
   toString(): string;
 }
 
@@ -21,15 +22,15 @@ export class ValueAtom implements ScheduleAtom {
     this.value = value;
   }
 
-  getDateValue(date: Date) {
+  getDateValue(date: DateTime) {
     return -1;
   }
 
-  calculateNextDate(date: Date, dateValue: number) {
+  calculateNextDate(date: DateTime, dateValue: number) {
     return date;
   }
 
-  getNextDateAfter(date: Date) {
+  getNextDateAfter(date: DateTime) {
     const dateValue = this.getDateValue(date);
 
     if (dateValue < this.value) {
@@ -39,7 +40,7 @@ export class ValueAtom implements ScheduleAtom {
     return null;
   }
 
-  isValid(date: Date) {
+  isValid(date: DateTime) {
     const dateValue = this.getDateValue(date);
 
     return dateValue === this.value;
@@ -96,20 +97,20 @@ export class RangeAtom implements ScheduleAtom {
     this.step = step;
   }
 
-  getDateValue(date: Date) {
+  getDateValue(date: DateTime) {
     return -1;
   }
 
   // Used for Day of Month to handle the variation in number of days from month to month
-  getMaxDateValue(date: Date) {
+  getMaxDateValue(date: DateTime) {
     return Infinity;
   }
 
-  calculateNextDate(date: Date, value: number) {
+  calculateNextDate(date: DateTime, value: number) {
     return date;
   }
 
-  getNextDateAfter(date: Date) {
+  getNextDateAfter(date: DateTime) {
     const dateValue = this.getDateValue(date);
     const maxDateValue = this.getMaxDateValue(date);
 
@@ -127,7 +128,7 @@ export class RangeAtom implements ScheduleAtom {
     return this.calculateNextDate(date, nextStepValue);
   }
 
-  isValid(date: Date) {
+  isValid(date: DateTime) {
     const minute = this.getDateValue(date);
 
     return (

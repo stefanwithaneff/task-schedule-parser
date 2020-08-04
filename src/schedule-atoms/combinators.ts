@@ -1,22 +1,22 @@
-import { min } from "date-fns";
+import { DateTime } from "luxon";
 import { ScheduleAtom } from "./base";
 
 export class OrAtom implements ScheduleAtom {
   constructor(private atoms: ScheduleAtom[]) {}
 
-  getNextDateAfter(date: Date) {
+  getNextDateAfter(date: DateTime) {
     const dateValues = this.atoms
       .map((atom) => atom.getNextDateAfter(date))
       .filter((result) => result !== null);
 
     if (dateValues.length > 0) {
-      return min(dateValues);
+      return DateTime.min(...dateValues);
     }
 
     return null;
   }
 
-  isValid(date: Date) {
+  isValid(date: DateTime) {
     return this.atoms.some((atom) => atom.isValid(date));
   }
 

@@ -1,24 +1,24 @@
-import { getHours, setHours } from "date-fns";
+import { DateTime } from "luxon";
 import { ValueAtom, RangeAtom } from "./base";
 
 export class HourValueAtom extends ValueAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = 23;
-  getDateValue(date: Date) {
-    return getHours(date);
+  getDateValue(date: DateTime) {
+    return date.hour;
   }
-  calculateNextDate(date: Date, value: number) {
-    return setHours(date, value);
+  calculateNextDate(date: DateTime, value: number) {
+    return date.set({ hour: value });
   }
 }
 
 export class HourRangeAtom extends RangeAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = 23;
-  getDateValue(date: Date) {
-    return getHours(date);
+  getDateValue(date: DateTime) {
+    return date.hour;
   }
-  calculateNextDate(date: Date, value: number) {
-    return setHours(date, value);
+  calculateNextDate(date: DateTime, value: number) {
+    return date.set({ hour: value });
   }
 }

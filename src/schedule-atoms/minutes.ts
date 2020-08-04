@@ -1,24 +1,24 @@
-import { getMinutes, setMinutes } from "date-fns";
+import { DateTime } from "luxon";
 import { ValueAtom, RangeAtom } from "./base";
 
 export class MinuteValueAtom extends ValueAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = 59;
-  getDateValue(date: Date) {
-    return getMinutes(date);
+  getDateValue(date: DateTime) {
+    return date.minute;
   }
-  calculateNextDate(date: Date, value: number) {
-    return setMinutes(date, value);
+  calculateNextDate(date: DateTime, value: number) {
+    return date.set({ minute: value });
   }
 }
 
 export class MinuteRangeAtom extends RangeAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = 59;
-  getDateValue(date: Date) {
-    return getMinutes(date);
+  getDateValue(date: DateTime) {
+    return date.minute;
   }
-  calculateNextDate(date: Date, value: number) {
-    return setMinutes(date, value);
+  calculateNextDate(date: DateTime, value: number) {
+    return date.set({ minute: value });
   }
 }
