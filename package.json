@@ -1,0 +1,25 @@
+{
+  "name": "cron-parser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "date-fns": "^2.15.0",
+    "date-fns-tz": "^1.0.10",
+    "parsimmon": "^1.15.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.7",
+    "@types/parsimmon": "^1.10.2",
+    "jest": "^26.1.0",
+    "prettier": "^2.0.5",
+    "ts-jest": "^26.1.4",
+    "typescript": "^3.9.7"
+  }
+}
