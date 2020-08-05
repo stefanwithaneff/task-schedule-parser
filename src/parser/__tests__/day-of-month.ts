@@ -73,11 +73,11 @@ describe("DayOfMonth parsing", () => {
   });
 
   it("parses a list of minute values", () => {
-    const result = DayOfMonth.parse("2,3-15/3,19,23-30") as Success<any>;
+    const result = DayOfMonth.parse("2,3-15/3,16W,L-5") as Success<any>;
 
     expect(result.status).toBe(true);
     expect(result.value.toString()).toBe(
-      "OR(Value(2),Range(3-15/3),Value(19),Range(23-30))"
+      "OR(Value(2),Range(3-15/3),Weekday(16),LastOfMonth(5))"
     );
   });
 });
