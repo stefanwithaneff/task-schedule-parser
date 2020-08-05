@@ -62,12 +62,6 @@ export abstract class RangeAtom implements ScheduleAtom {
     const min = minAtom instanceof ValueAtom ? minAtom.value : minAtom;
     const max = maxAtom instanceof ValueAtom ? maxAtom.value : maxAtom;
 
-    if (max < min) {
-      throw new InvalidRangeError(
-        `Min range value cannot be higher than the max value for ${this.constructor.name}. Min: ${min}, Max: ${max}`
-      );
-    }
-
     const { MIN_VALUE, MAX_VALUE } = this.constructor as any;
 
     if (min < MIN_VALUE) {
@@ -85,6 +79,12 @@ export abstract class RangeAtom implements ScheduleAtom {
     if (step < 1 || step > MAX_VALUE) {
       throw new RangeError(
         `Invalid step value for ${this.constructor.name}: ${step}. Must be between 1 and ${MAX_VALUE}`
+      );
+    }
+
+    if (max < min) {
+      throw new InvalidRangeError(
+        `Min range value cannot be higher than the max value for ${this.constructor.name}. Min: ${min}, Max: ${max}`
       );
     }
 

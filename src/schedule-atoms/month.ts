@@ -8,7 +8,7 @@ export class MonthValueAtom extends ValueAtom {
     return date.month;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ month: value });
+    return date.set({ month: value }).startOf("month");
   }
 }
 
@@ -19,6 +19,6 @@ export class MonthRangeAtom extends RangeAtom {
     return date.month;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ month: value });
+    return date.set({ month: value }).startOf("month");
   }
 }

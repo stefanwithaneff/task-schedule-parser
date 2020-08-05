@@ -8,7 +8,7 @@ export class MinuteValueAtom extends ValueAtom {
     return date.minute;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ minute: value });
+    return date.set({ minute: value }).startOf("minute");
   }
 }
 
@@ -19,6 +19,6 @@ export class MinuteRangeAtom extends RangeAtom {
     return date.minute;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ minute: value });
+    return date.set({ minute: value }).startOf("minute");
   }
 }

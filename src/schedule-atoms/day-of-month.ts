@@ -11,7 +11,7 @@ export class DayOfMonthValueAtom extends ValueAtom {
     return date.day;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ day: value });
+    return date.set({ day: value }).startOf("day");
   }
 }
 
@@ -27,7 +27,7 @@ export class DayOfMonthRangeAtom extends RangeAtom {
   }
 
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ day: value });
+    return date.set({ day: value }).startOf("day");
   }
 }
 
@@ -82,7 +82,7 @@ export class DayOfMonthWeekdayAtom implements ScheduleAtom {
     const dayOfMonth = date.day;
 
     if (dayOfMonth < value) {
-      return date.set({ day: value });
+      return date.set({ day: value }).startOf("day");
     }
     return null;
   }
@@ -115,7 +115,7 @@ export class LastDayOfMonthAtom implements ScheduleAtom {
     const daysInMonthWithOffset = date.daysInMonth - this.offset;
 
     if (date.day < daysInMonthWithOffset) {
-      return date.set({ day: daysInMonthWithOffset });
+      return date.set({ day: daysInMonthWithOffset }).startOf("day");
     }
 
     return null;

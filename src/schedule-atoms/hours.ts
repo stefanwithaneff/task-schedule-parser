@@ -8,7 +8,7 @@ export class HourValueAtom extends ValueAtom {
     return date.hour;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ hour: value });
+    return date.set({ hour: value }).startOf("hour");
   }
 }
 
@@ -19,6 +19,6 @@ export class HourRangeAtom extends RangeAtom {
     return date.hour;
   }
   calculateNextDate(date: DateTime, value: number) {
-    return date.set({ hour: value });
+    return date.set({ hour: value }).startOf("hour");
   }
 }
