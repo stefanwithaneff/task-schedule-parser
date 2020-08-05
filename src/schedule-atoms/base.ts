@@ -7,7 +7,7 @@ export interface ScheduleAtom {
   toString(): string;
 }
 
-export class ValueAtom implements ScheduleAtom {
+export abstract class ValueAtom implements ScheduleAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = Infinity;
   readonly value: number;
@@ -22,13 +22,9 @@ export class ValueAtom implements ScheduleAtom {
     this.value = value;
   }
 
-  getDateValue(date: DateTime) {
-    return -1;
-  }
+  abstract getDateValue(date: DateTime): number;
 
-  calculateNextDate(date: DateTime, dateValue: number) {
-    return date;
-  }
+  abstract calculateNextDate(date: DateTime, dateValue: number): DateTime;
 
   getNextDateAfter(date: DateTime) {
     const dateValue = this.getDateValue(date);
@@ -51,7 +47,7 @@ export class ValueAtom implements ScheduleAtom {
   }
 }
 
-export class RangeAtom implements ScheduleAtom {
+export abstract class RangeAtom implements ScheduleAtom {
   static MIN_VALUE = 0;
   static MAX_VALUE = Infinity;
   readonly min: number;
@@ -97,18 +93,14 @@ export class RangeAtom implements ScheduleAtom {
     this.step = step;
   }
 
-  getDateValue(date: DateTime) {
-    return -1;
-  }
+  abstract getDateValue(date: DateTime): number;
 
   // Used for Day of Month to handle the variation in number of days from month to month
   getMaxDateValue(date: DateTime) {
     return Infinity;
   }
 
-  calculateNextDate(date: DateTime, value: number) {
-    return date;
-  }
+  abstract calculateNextDate(date: DateTime, value: number): DateTime;
 
   getNextDateAfter(date: DateTime) {
     const dateValue = this.getDateValue(date);
