@@ -144,3 +144,17 @@ export class RangeAtom implements ScheduleAtom {
     })`;
   }
 }
+
+export class NoopAtom implements ScheduleAtom {
+  getNextDateAfter(date: DateTime) {
+    return null;
+  }
+
+  isValid(date: DateTime) {
+    return true;
+  }
+
+  toString() {
+    return "Noop";
+  }
+}

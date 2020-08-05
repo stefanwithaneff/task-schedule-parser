@@ -1,5 +1,9 @@
 import { DateTime } from "luxon";
-import { DayOfMonthWeekdayAtom, DayOfMonthValueAtom } from "../day-of-month";
+import {
+  DayOfMonthWeekdayAtom,
+  DayOfMonthValueAtom,
+  LastDayOfMonthAtom,
+} from "../day-of-month";
 
 describe("Day of Month Scheduling Atoms", () => {
   describe("Weekday Atom", () => {
@@ -64,6 +68,29 @@ describe("Day of Month Scheduling Atoms", () => {
       const date = DateTime.local(2021, 2, 1);
 
       expect(atom.getNextDateAfter(date)).toEqual(date.set({ day: 26 }));
+    });
+  });
+
+  describe("Last Day of Month Atom", () => {
+    it("returns the date for the last day of the month if the provided date is on an earlier day", () => {
+      const date = DateTime.local(2020, 8, 1);
+      const atom = new LastDayOfMonthAtom();
+
+      expect(atom.getNextDateAfter(date)).toEqual(date.set({ day: 31 }));
+    });
+
+    it("returns the date for the nth-to-last day of the month if an offset is provided", () => {
+      const date = DateTime.local(2020, 9, 1);
+      const atom = new LastDayOfMonthAtom(4);
+
+      expect(atom.getNextDateAfter(date)).toEqual(date.set({ day: 26 }));
+    });
+
+    it("returns null if the provided date falls after the nth-to-last day of the month", () => {
+      const date = DateTime.local(2020, 9, 28);
+      const atom = new LastDayOfMonthAtom(4);
+
+      expect(atom.getNextDateAfter(date)).toBe(null);
     });
   });
 });

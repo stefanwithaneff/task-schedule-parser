@@ -2,7 +2,7 @@ import Parsimmon from "parsimmon";
 import { OrAtom } from "../schedule-atoms/combinators";
 import { HourValueAtom, HourRangeAtom } from "../schedule-atoms/hours";
 
-const HoursRegex = Parsimmon.regexp(/(2[0-3]|[0-1]?[0-9])/);
+const HoursRegex = Parsimmon.regexp(/\d?\d/);
 
 const HoursWildcard = Parsimmon.string("*").map(() => new HourRangeAtom(0, 23));
 

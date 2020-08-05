@@ -2,7 +2,7 @@ import Parsimmon from "parsimmon";
 import { OrAtom } from "../schedule-atoms/combinators";
 import { MinuteValueAtom, MinuteRangeAtom } from "../schedule-atoms/minutes";
 
-const MinutesRegex = Parsimmon.regexp(/[0-5]?[0-9]/);
+const MinutesRegex = Parsimmon.regexp(/\d?\d/);
 
 const MinutesWildcard = Parsimmon.string("*").map(
   () => new MinuteRangeAtom(0, 59)

@@ -97,3 +97,35 @@ export class DayOfMonthWeekdayAtom implements ScheduleAtom {
     return `Weekday(${this.value})`;
   }
 }
+
+export class LastDayOfMonthAtom implements ScheduleAtom {
+  readonly offset: number;
+  constructor(offset: number = 0) {
+    if (offset < 0 || offset > MAX_DAY_OF_MONTH - 1) {
+      throw new RangeError(
+        `Invalid value for Day of Month: L-${offset}. Must be between ${MIN_DAY_OF_MONTH} and ${
+          MAX_DAY_OF_MONTH - 1
+        }`
+      );
+    }
+    this.offset = offset;
+  }
+
+  getNextDateAfter(date: DateTime) {
+    const daysInMonthWithOffset = date.daysInMonth - this.offset;
+
+    if (date.day < daysInMonthWithOffset) {
+      return date.set({ day: daysInMonthWithOffset });
+    }
+
+    return null;
+  }
+
+  isValid(date: DateTime) {
+    return date.day === date.daysInMonth - this.offset;
+  }
+
+  toString() {
+    return `LastOfMonth(${this.offset})`;
+  }
+}
