@@ -151,7 +151,7 @@ export class NoopAtom implements ScheduleAtom {
   }
 
   isValid(date: DateTime) {
-    return true;
+    return false;
   }
 
   toString() {

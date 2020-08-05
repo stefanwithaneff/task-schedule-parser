@@ -1,6 +1,7 @@
 import { DateTime } from "luxon";
 import { InvalidRangeError } from "../errors";
 import { MinuteValueAtom, MinuteRangeAtom } from "../minutes";
+import { NoopAtom } from "../base";
 
 describe("Base Scheduling Atoms", () => {
   describe("Value Atom", () => {
@@ -135,6 +136,26 @@ describe("Base Scheduling Atoms", () => {
     it("returns false if the provided date has a value within the range but does not match the provided step", () => {
       const atom = new MinuteRangeAtom(15, 30, 5);
       const date = DateTime.local(2020, 8, 1, 0, 19);
+
+      expect(atom.isValid(date)).toBe(false);
+    });
+  });
+
+  describe("Noop Atom", () => {
+    it("always returns null for the next date", () => {
+      const atom = new NoopAtom();
+      const date = DateTime.fromMillis(
+        Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
+      );
+
+      expect(atom.getNextDateAfter(date)).toBe(null);
+    });
+
+    it("always returns false for date validity", () => {
+      const atom = new NoopAtom();
+      const date = DateTime.fromMillis(
+        Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)
+      );
 
       expect(atom.isValid(date)).toBe(false);
     });
