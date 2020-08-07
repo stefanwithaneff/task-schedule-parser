@@ -112,7 +112,8 @@ export class DayOfWeekRangeAtom implements ScheduleAtom {
 export class LastDayOfWeekAtom implements ScheduleAtom {
   readonly value: number;
 
-  constructor(value: number) {
+  constructor(atom: DayOfWeekValueAtom) {
+    const value = atom.value;
     if (
       value < MIN_CRON_DAY_OF_WEEK_VALUE ||
       value > MAX_CRON_DAY_OF_WEEK_VALUE

@@ -120,23 +120,27 @@ describe("Day of Week Scheduling Atoms", () => {
 
   describe("Last Day of Week atom", () => {
     it("throws a RangeError when the provided value is less than the minimum possible value", () => {
-      expect(() => new LastDayOfWeekAtom(-1)).toThrow(RangeError);
+      expect(() => new LastDayOfWeekAtom(new DayOfWeekValueAtom(-1))).toThrow(
+        RangeError
+      );
     });
 
     it("throws a RangeError when the provided value is greater than the maximum possible value", () => {
-      expect(() => new LastDayOfWeekAtom(7)).toThrow(RangeError);
+      expect(() => new LastDayOfWeekAtom(new DayOfWeekValueAtom(7))).toThrow(
+        RangeError
+      );
     });
 
     it("returns the last day of the month if it matches the provided weekday", () => {
-      const atom = new LastDayOfWeekAtom(1);
+      const atom = new LastDayOfWeekAtom(new DayOfWeekValueAtom(1));
       const date = DateTime.local(2020, 8, 15);
 
       expect(atom.getNextDateAfter(date)).toEqual(date.set({ day: 31 }));
     });
 
     it("returns the last nth day of the month that matches the provided value", () => {
-      const atom1 = new LastDayOfWeekAtom(0);
-      const atom2 = new LastDayOfWeekAtom(4);
+      const atom1 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(0));
+      const atom2 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(4));
       const date = DateTime.local(2020, 8, 15);
 
       expect(atom1.getNextDateAfter(date)).toEqual(date.set({ day: 30 }));
@@ -144,7 +148,7 @@ describe("Day of Week Scheduling Atoms", () => {
     });
 
     it("returns null if the provided date occurs on or after the last nth day of the month", () => {
-      const atom = new LastDayOfWeekAtom(4);
+      const atom = new LastDayOfWeekAtom(new DayOfWeekValueAtom(4));
       const date1 = DateTime.local(2020, 8, 27);
       const date2 = DateTime.local(2020, 8, 29);
 
@@ -153,9 +157,9 @@ describe("Day of Week Scheduling Atoms", () => {
     });
 
     it("returns true if the provided date is the last matching weekday in the month", () => {
-      const atom1 = new LastDayOfWeekAtom(4);
+      const atom1 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(4));
       const date1 = DateTime.local(2020, 8, 27);
-      const atom2 = new LastDayOfWeekAtom(0);
+      const atom2 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(0));
       const date2 = DateTime.local(2020, 8, 30);
 
       expect(atom1.isValid(date1)).toBe(true);
@@ -163,9 +167,9 @@ describe("Day of Week Scheduling Atoms", () => {
     });
 
     it("returns false if the provided date is not the last matching weekday in the month", () => {
-      const atom1 = new LastDayOfWeekAtom(4);
+      const atom1 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(4));
       const date1 = DateTime.local(2020, 8, 29);
-      const atom2 = new LastDayOfWeekAtom(0);
+      const atom2 = new LastDayOfWeekAtom(new DayOfWeekValueAtom(0));
       const date2 = DateTime.local(2020, 8, 16);
 
       expect(atom1.isValid(date1)).toBe(false);
