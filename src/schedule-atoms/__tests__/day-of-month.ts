@@ -2,10 +2,29 @@ import { DateTime } from "luxon";
 import {
   DayOfMonthWeekdayAtom,
   DayOfMonthValueAtom,
+  DayOfMonthRangeAtom,
   LastDayOfMonthAtom,
 } from "../day-of-month";
 
 describe("Day of Month Scheduling Atoms", () => {
+  describe("Value atom", () => {
+    it("returns null if the provided value is greater than the total number of days for the given month", () => {
+      const atom = new DayOfMonthValueAtom(31);
+      const date = DateTime.local(2020, 9, 1);
+
+      expect(atom.getNextDateAfter(date)).toBe(null);
+    });
+  });
+
+  describe("Range atom", () => {
+    it("returns null if the next date in the range does not exist", () => {
+      const atom = new DayOfMonthRangeAtom(28, 31);
+      const date = DateTime.local(2020, 9, 30);
+
+      expect(atom.getNextDateAfter(date)).toBe(null);
+    });
+  });
+
   describe("Weekday Atom", () => {
     const beginningOfMonthSaturday = DateTime.local(2020, 8, 1);
     const endOfMonthSunday = DateTime.local(2021, 1, 31);

@@ -10,6 +10,11 @@ export class DayOfMonthValueAtom extends ValueAtom {
   getDateValue(date: DateTime) {
     return date.day;
   }
+
+  getMaxDateValue(date: DateTime) {
+    return date.daysInMonth;
+  }
+
   calculateNextDate(date: DateTime, value: number) {
     return date.set({ day: value }).startOf("day");
   }

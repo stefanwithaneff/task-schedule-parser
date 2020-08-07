@@ -24,12 +24,17 @@ export abstract class ValueAtom implements ScheduleAtom {
 
   abstract getDateValue(date: DateTime): number;
 
+  // Used for Day of Month to handle the variation in number of days from month to month
+  getMaxDateValue(date: DateTime) {
+    return Infinity;
+  }
+
   abstract calculateNextDate(date: DateTime, dateValue: number): DateTime;
 
   getNextDateAfter(date: DateTime) {
     const dateValue = this.getDateValue(date);
 
-    if (dateValue < this.value) {
+    if (dateValue < this.value && this.value <= this.getMaxDateValue(date)) {
       return this.calculateNextDate(date, this.value);
     }
 
