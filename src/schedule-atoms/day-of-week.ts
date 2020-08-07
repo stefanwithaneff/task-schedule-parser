@@ -107,6 +107,10 @@ export class DayOfWeekRangeAtom implements ScheduleAtom {
 
     return currentWeekday >= this.min && currentWeekday <= this.max;
   }
+
+  toString() {
+    return `Range(${this.min}-${this.max})`;
+  }
 }
 
 export class LastDayOfWeekAtom implements ScheduleAtom {
@@ -208,5 +212,9 @@ export class NthDayOfWeekAtom implements ScheduleAtom {
       convertLuxonValueToCronValue(date.weekday) === this.dayOfWeek &&
       Math.ceil(date.day / 7) === this.ordinal
     );
+  }
+
+  toString() {
+    return `NthDayOfWeek(${this.dayOfWeek},${this.ordinal})`;
   }
 }
