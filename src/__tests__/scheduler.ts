@@ -139,7 +139,7 @@ describe("Scheduler", () => {
     expect(scheduler.getNextDateAfter(date, tz)).toEqual(expectedDate);
   });
 
-  it("only executes once when the time is set backward for daylight savings time", () => {
+  it("only executes once for specified values when the time is set backward for the end of DST", () => {
     const tz = "America/New_York";
     const cronExpression = "0 1 * * *";
     const scheduler = new Scheduler({ cronExpression });
@@ -162,6 +162,35 @@ describe("Scheduler", () => {
       month: 11,
       day: 2,
       hour: 1,
+      zone: tz,
+    }).toJSDate();
+
+    expect(scheduler.getNextDateAfter(date, tz)).toEqual(expectedDate);
+
+    expect(scheduler.getNextDateAfter(expectedDate, tz)).toEqual(
+      nextExpectedDate
+    );
+  });
+
+  it("executes twice for single-step ranges when the time is set backward for the end of DST", () => {
+    const tz = "America/New_York";
+    const cronExpression = "0 0-4 * * *";
+    const scheduler = new Scheduler({ cronExpression });
+    const date = DateTime.fromObject({
+      year: 2020,
+      month: 11,
+      day: 1,
+      hour: 0,
+      zone: tz,
+    }).toJSDate();
+    const expectedDate = DateTime.fromObject({
+      year: 2020,
+      month: 11,
+      day: 1,
+      hour: 1,
+      zone: tz,
+    }).toJSDate();
+    const nextExpectedDate = DateTime.fromISO("2020-11-01T01:00:00-05:00", {
       zone: tz,
     }).toJSDate();
 
