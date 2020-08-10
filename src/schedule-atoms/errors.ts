@@ -1,5 +1,3 @@
-export class InvalidRangeError extends Error {
-  constructor(...args) {
-    super(...args);
-  }
-}
+export class InvalidRangeError extends Error {}
+
+export class NextDateNotFoundError extends Error {}

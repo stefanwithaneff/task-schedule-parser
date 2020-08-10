@@ -42,7 +42,7 @@ const MinutesRangeOrValue = Parsimmon.alt(
 
 const MinutesList = MinutesRangeOrValue.sepBy(
   Parsimmon.string(",")
-).map((atoms) => (atoms.length === 1 ? atoms : new OrAtom(atoms)));
+).map((atoms) => (atoms.length === 1 ? atoms[0] : new OrAtom(atoms)));
 
 export const Minutes = Parsimmon.alt(
   MinutesSteppedWildcard,

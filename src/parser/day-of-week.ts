@@ -45,7 +45,7 @@ const DayOfWeekRangeOrValue = Parsimmon.alt(
 
 const DayOfWeekList = DayOfWeekRangeOrValue.sepBy(
   Parsimmon.string(",")
-).map((atoms) => (atoms.length === 1 ? atoms : new OrAtom(atoms)));
+).map((atoms) => (atoms.length === 1 ? atoms[0] : new OrAtom(atoms)));
 
 const Blank = Parsimmon.string("?").map(() => new NoopAtom());
 

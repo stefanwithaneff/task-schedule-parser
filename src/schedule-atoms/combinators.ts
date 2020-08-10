@@ -7,7 +7,7 @@ export class OrAtom implements ScheduleAtom {
   getNextDateAfter(date: DateTime) {
     const dateValues = this.atoms
       .map((atom) => atom.getNextDateAfter(date))
-      .filter((result) => result !== null);
+      .filter((result) => result !== null) as DateTime[];
 
     if (dateValues.length > 0) {
       return DateTime.min(...dateValues);

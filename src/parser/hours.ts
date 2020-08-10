@@ -37,7 +37,7 @@ const HoursRangeOrValue = Parsimmon.alt(
 );
 
 const HoursList = HoursRangeOrValue.sepBy(Parsimmon.string(",")).map((atoms) =>
-  atoms.length === 1 ? atoms : new OrAtom(atoms)
+  atoms.length === 1 ? atoms[0] : new OrAtom(atoms)
 );
 
 export const Hours = Parsimmon.alt(

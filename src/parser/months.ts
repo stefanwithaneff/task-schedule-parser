@@ -42,7 +42,7 @@ const MonthsRangeOrValue = Parsimmon.alt(
 
 const MonthsList = MonthsRangeOrValue.sepBy(
   Parsimmon.string(",")
-).map((atoms) => (atoms.length === 1 ? atoms : new OrAtom(atoms)));
+).map((atoms) => (atoms.length === 1 ? atoms[0] : new OrAtom(atoms)));
 
 export const Months = Parsimmon.alt(
   MonthsSteppedWildcard,
