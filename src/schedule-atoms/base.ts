@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { InvalidRangeError } from "./errors";
+import { InvalidRangeError } from "../errors";
 
 export interface ScheduleAtom {
   getNextDateAfter(date: DateTime): DateTime | null;

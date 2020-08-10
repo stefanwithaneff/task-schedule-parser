@@ -1,5 +1,5 @@
 import { DateTime } from "luxon";
-import { InvalidRangeError } from "../errors";
+import { InvalidRangeError } from "../../errors";
 import { MinuteValueAtom, MinuteRangeAtom } from "../minutes";
 import { NoopAtom } from "../base";
 

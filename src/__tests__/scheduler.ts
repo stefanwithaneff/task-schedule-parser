@@ -1,5 +1,6 @@
 import { DateTime } from "luxon";
 import { Scheduler } from "../scheduler";
+import { NextDateNotFoundError } from "../errors";
 
 describe("Scheduler", () => {
   it("returns the next date that matches the provided minutes", () => {
@@ -173,5 +174,13 @@ describe("Scheduler", () => {
 
   it("throws an error if the provided cron expression is invalid", () => {
     expect(() => new Scheduler({ cronExpression: "* * * *" })).toThrow();
+  });
+
+  it("throws a NextDateNotFound error if a next date cannot be found for the provided schedule", () => {
+    const scheduler = new Scheduler({ cronExpression: "* * 31 2 ?" });
+
+    expect(() => scheduler.getNextDateAfter(new Date())).toThrow(
+      NextDateNotFoundError
+    );
   });
 });

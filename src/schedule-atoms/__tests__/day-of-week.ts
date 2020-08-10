@@ -6,7 +6,7 @@ import {
   NthDayOfWeekAtom,
 } from "../day-of-week";
 import { DayOfMonthRangeAtom } from "../day-of-month";
-import { InvalidRangeError } from "../errors";
+import { InvalidRangeError } from "../../errors";
 
 describe("Day of Week Scheduling Atoms", () => {
   describe("Day of Week Value atom", () => {

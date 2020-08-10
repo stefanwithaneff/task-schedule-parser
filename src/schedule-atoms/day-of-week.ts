@@ -1,6 +1,6 @@
 import { DateTime } from "luxon";
 import { ScheduleAtom } from "./base";
-import { InvalidRangeError } from "./errors";
+import { InvalidRangeError } from "../errors";
 
 const MIN_CRON_DAY_OF_WEEK_VALUE = 0;
 const MAX_CRON_DAY_OF_WEEK_VALUE = 6;

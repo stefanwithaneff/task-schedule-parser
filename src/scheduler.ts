@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import { ScheduleAtom } from "./schedule-atoms/base";
 import { Cron } from "./parser/cron";
-import { NextDateNotFoundError } from "./schedule-atoms/errors";
+import { NextDateNotFoundError } from "./errors";
 
 type SchedulerConfig = {
   cronExpression: string;
