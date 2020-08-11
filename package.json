@@ -1,14 +1,21 @@
 {
-  "name": "cron-parser",
+  "name": "task-schedule-parser",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc",
+    "prepublishOnly": "npm test && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "files": [
+    "/dist",
+    "tsconfig.json"
+  ],
   "dependencies": {
     "luxon": "^1.24.1",
     "parsimmon": "^1.15.0"
